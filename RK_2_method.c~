@@ -1,0 +1,32 @@
+# include<stdio.h>
+
+#define dy(t,theta) -g/l*theta_0
+#define dtheta(t,theta) y_0
+
+int main()
+{
+  float theta_0,h,y_n,theta_n,dy_dt_1,dtheta_dt_1,t,g,l,dy_dt_2,dtheta_dt_2;
+  float k11,k21,y_0;
+  int i,n;
+  h=0.15;
+  t=0;
+  n=40;
+  theta_0=0.175;
+  y_0=0;
+  g=9.81;
+  l=0.6;
+  for (i=0;i<n+1;i=i+1)
+    {dy_dt_1=dy(t,theta_0);
+      dtheta_dt_1=dtheta(t,theta);
+      k11=h*dy_dt_1;
+      dy_dt_2=dy(t+h,theta_0+k11);
+      k21=h*dy_dt_2;
+      y_n=y_0+(k11+k21)/2;
+      theta_n=theta_0+(k11+k21)/2;
+      printf("%f,  %f \n",t,theta_0);
+      y_0=y_n;
+      theta_0=theta_n;
+      t=t+h;
+    }
+  return 0;
+}
